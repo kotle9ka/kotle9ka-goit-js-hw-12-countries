@@ -1,8 +1,7 @@
 import debounce from 'lodash.debounce';
 import { alert } from '@pnotify/core';
-import './css/styles.css';
+import '../src/css/styles.css';
 import fetchCountries from './js/fetchCountries.js';
-
 
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
@@ -13,18 +12,18 @@ const result = document.querySelector('#result');
 function renderCountryList(countries) {
   return `
     <ul>
-      ${countries.map(country => `<li>${country.name}</li>`).join('')}
+      ${countries.map(country => `<li>${country.name.common}</li>`).join('')}
     </ul>
   `;
 }
 
 function renderCountryDetails(country) {
   return `
-    <h2>${country.name}</h2>
-    <p><b>Столиця:</b> ${country.capital}</p>
+    <h2>${country.name.common}</h2>
+    <p><b>Столиця:</b> ${country.capital[0]}</p>
     <p><b>Населення:</b> ${country.population.toLocaleString()}</p>
-    <p><b>Мова:</b> ${country.languages.map(l => l.name).join(', ')}</p>
-    <img src="${country.flag}" alt="${country.name}">
+    <p><b>Мова:</b> ${Object.values(country.languages).join(', ')}</p>
+    <img src="${country.flags.png}" alt="${country.name.common}">
   `;
 }
 
